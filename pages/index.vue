@@ -1,4 +1,4 @@
 <template lang="pug">
 div
-  UiButton(outlined) helloworld
+  UiButton(outlined, icon="favorite") helloworld
 </template>
