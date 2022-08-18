@@ -1,22 +1,24 @@
 <template lang="pug">
 div
-  UiGrid.container
-    UiGridCell.d-none-phone(
-      :columns="{ default: 4, tablet: 8 }",
-      style="background-color: gray"
-    ) Menu
-    UiGridCell(
-      :columns="{ default: 6, tablet: 8 }",
-      style="background-color: gray"
-    ) Contents
-    UiGridCell(
-      :columns="{ default: 2, tablet: 8, phone: 4 }",
-      style="background-color: gray"
-    ) info
+  .bar
+    LayoutTopBar
+  #contents.wrapper
+    .menu
+      LayoutMenu
+    .content content
+    .info.d-none.d-desktop-block info
 </template>
 
 <style scoped lang="scss">
-.container {
-  max-width: 1440px;
+.content {
+  flex-grow: 1;
+}
+.wrapper {
+  display: flex;
+}
+.wrapper > * {
+  min-height: 100vh;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
 }
 </style>
