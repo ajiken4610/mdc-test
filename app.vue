@@ -1,10 +1,37 @@
 <template lang="pug">
-.container
+div
+  NuxtLoadingIndicator(color="#0000ff")
   NuxtLayout
     NuxtPage
     template(#info)
       | info
 </template>
+
+<script lang="ts">
+// デリゲートでaタグのクリックイベント
+document.addEventListener(
+  "click",
+  (e) => {
+    let el = e.target as HTMLElement;
+    while (el && !el.matches("body")) {
+      if (el.matches("a[href]")) {
+        e.preventDefault();
+        const href = el.getAttribute("href") || "";
+        if (href.match(/^https?:\/\/.*$/g)) {
+          window.open(href);
+        } else if (href.match(/^#.*$/g)) {
+          location.hash = href.substring(1);
+        } else {
+          useRouter().push(href);
+        }
+        break;
+      }
+      el = el.parentNode as HTMLElement;
+    }
+  },
+  false
+);
+</script>
 
 <style lang="scss">
 // @use "@material/layout-grid" with (
@@ -43,4 +70,8 @@ $grid-breakpoints: (
 @import "bootstrap/scss/utilities";
 @import "bootstrap/scss/utilities/api";
 @import "bootstrap/scss/containers";
+
+a[href] {
+  text-decoration: none;
+}
 </style>

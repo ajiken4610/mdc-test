@@ -1,17 +1,29 @@
 <template lang="pug">
-UiDrawer(:type="type", v-model="open", navId="menu")
+UiDrawer.position-fixed.drawer(:type="type", v-model="open", navId="menu")
   UiDrawerHeader
     UiDrawerTitle Title
     UiDrawerSubtitle Subtitle
   UiDrawerContent
-    UiNav
-      NuxtLink(
-        v-for="(item,index) of items",
-        v-slot="{ isActive, href }",
-        :to="item.link",
-        :key="index"
-      )
-        UiNavItem(:href="href", :active="isActive", :icon="item.icon") {{ item.displayName }}
+    .d-flex.flex-column.h-100
+      UiNav
+        NuxtLink(
+          v-for="(item,index) of topItems",
+          custom,
+          v-slot="{ isActive, href }",
+          :to="item.link",
+          :key="index"
+        )
+          UiNavItem(:href="href", :active="isActive") {{ item.displayName }}
+            template(#before="{ iconClass }")
+              UiIcon(:class="iconClass") {{ item.icon }}
+      .mt-auto.d-medium-none
+      .d-none.d-medium-block
+        UiDivider
+      UiNav
+        NuxtLink(to="/account", custom, v-slot="{ isActive, href }")
+          UiNavItem(:href="href", :active="isActive") Account
+            template(#before="{ iconClass }")
+              UiIcon(:class="iconClass") person
 UiDrawerAppContent
   slot
 </template>
@@ -28,7 +40,7 @@ const type = computed(() => {
   return showHeader.value ? "modal" : "dismissible";
 });
 
-const items = reactive([
+const topItems = reactive([
   {
     icon: "home",
     displayName: "Home",
@@ -41,3 +53,9 @@ const items = reactive([
   },
 ]);
 </script>
+
+<style scoped lang="scss">
+.drawer {
+  z-index: 0;
+}
+</style>
