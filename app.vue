@@ -1,6 +1,9 @@
 <template lang="pug">
 .container
-  NuxtPage
+  NuxtLayout
+    NuxtPage
+    template(#info)
+      | info
 </template>
 
 <style lang="scss">
@@ -13,8 +16,8 @@
 //     desktop: 1440px,
 //   )
 // );
-// @use "balm-ui/dist/balm-ui";
-@use "material-components-web/material-components-web";
+@use "balm-ui/dist/balm-ui";
+// @use "material-components-web/material-components-web";
 // Custom.scss
 // Option B: Include parts of Bootstrap
 

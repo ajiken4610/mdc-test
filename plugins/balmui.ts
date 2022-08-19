@@ -6,7 +6,8 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.use(BalmUI, {
     $theme: {
       // (Optional) New in 9.28.0, See ThemeColor type in APIs.
-      primary: "#000088",
+      primary: "#0290f5",
+      "on-primary": "white",
     },
   });
   nuxtApp.vueApp.use(BalmUIPlus);
